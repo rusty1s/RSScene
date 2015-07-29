@@ -10,6 +10,8 @@
 		616F28DD1B67FAE00070215F /* RSScene.h in Headers */ = {isa = PBXBuildFile; fileRef = 616F28DC1B67FAE00070215F /* RSScene.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		616F28E41B67FAE00070215F /* RSScene.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616F28D91B67FAE00070215F /* RSScene.framework */; };
 		616F28E91B67FAE00070215F /* RSSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616F28E81B67FAE00070215F /* RSSceneTests.swift */; };
+		616F296A1B67FD2C0070215F /* RSScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616F29691B67FD2C0070215F /* RSScene.swift */; };
+		616F296C1B6800350070215F /* RSSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616F296B1B6800350070215F /* RSSceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		616F28E31B67FAE00070215F /* RSSceneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSSceneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		616F28E81B67FAE00070215F /* RSSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSceneTests.swift; sourceTree = "<group>"; };
 		616F28EA1B67FAE00070215F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		616F29691B67FD2C0070215F /* RSScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSScene.swift; sourceTree = "<group>"; };
+		616F296B1B6800350070215F /* RSSceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 			children = (
 				616F28DC1B67FAE00070215F /* RSScene.h */,
 				616F28DE1B67FAE00070215F /* Info.plist */,
+				616F29691B67FD2C0070215F /* RSScene.swift */,
+				616F296B1B6800350070215F /* RSSceneDelegate.swift */,
 			);
 			path = RSScene;
 			sourceTree = "<group>";
@@ -142,6 +148,7 @@
 		616F28D01B67FAE00070215F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Matthias Fey";
 				TargetAttributes = {
@@ -193,6 +200,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				616F296C1B6800350070215F /* RSSceneDelegate.swift in Sources */,
+				616F296A1B67FD2C0070215F /* RSScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +316,7 @@
 		616F28EE1B67FAE00070215F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -317,12 +327,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rusty1s.RSScene;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		616F28EF1B67FAE00070215F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
