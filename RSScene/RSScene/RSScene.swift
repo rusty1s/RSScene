@@ -20,14 +20,22 @@ public class RSScene : SKScene {
     public var tps: Int {
         set {
             _tps = max(0, newValue)
-            countPerSecond = 0
+            actTPS = 0
+            tpsLabel?.text = "tps: 0.0"
         }
         get { return _tps }
     }
     private var _tps: Int = 30
     
+    /// A Boolean value that indicates whether the scene's view displays
+    /// a game logic rate indicator.
+    public var showsTPS: Bool = false {
+        didSet { tpsLabel?.hidden = !showsTPS }
+    }
+    
     /// The quality of service you want to give to the logic loop
-    /// executed in the global queue.
+    /// executed in the global queue.  The default value is
+    /// `QOS_CLASS_BACKGROUND`.
     public var priority: qos_class_t = QOS_CLASS_BACKGROUND
     
     /// A delegate to be called during the logic loop. When the delegate
@@ -39,11 +47,36 @@ public class RSScene : SKScene {
     
     private var inGameLogic: Bool = false
     
-    private var countPerSecond: Int = 0
+    private var actTPS: Int = 0
     
     private var startTimeInterval: NSTimeInterval = 0
     
     private var currentTime: NSTimeInterval = 0
+    
+    private weak var tpsLabel: UILabel?
+    
+    // MARK: Presenting a scene
+    
+    /// Called immediately after a scene is presented by a view.
+    /// Note that when you override this method, you need to call
+    /// its super method.
+    public override func didMoveToView(view: SKView) {
+        let label = UILabel(frame: CGRect(x: 4, y: 20, width: 60, height: 15))
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont(name: "Menlo", size: 10)
+        label.text = "tps: 0.0"
+        label.hidden = !showsTPS
+        
+        view.addSubview(label)
+        tpsLabel = label
+    }
+    
+    /// Called immediately before a scene is removed from a view.
+    /// Note that when you override this method, you need to call
+    /// its super method.
+    public override func willMoveFromView(view: SKView) {
+        tpsLabel?.removeFromSuperview()
+    }
     
     // MARK: Executing the Game Logic Loop
     
@@ -67,7 +100,7 @@ public class RSScene : SKScene {
         if !inGameLogic && tps > 0 {
             
             // wait for the game logic interval to pass the tps
-            if currentTime - startTimeInterval > Double(countPerSecond)*(1.0/Double(tps)) {
+            if currentTime - startTimeInterval > Double(actTPS)*(1.0/Double(tps)) {
             
                 // execute the game logic
                 inGameLogic = true
@@ -79,10 +112,14 @@ public class RSScene : SKScene {
                         self.updateGameLogic(self.currentTime)
                     }
                     
-                    self.countPerSecond++
+                    self.actTPS++
                     // if a second has passed, reset local variables
                     if self.currentTime > 1.0+self.startTimeInterval {
-                        self.countPerSecond = 0
+                        let tps = min(self.actTPS, self.tps)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tpsLabel?.text = "tps: \(tps).0"
+                        }
+                        self.actTPS = 0
                         self.startTimeInterval = self.currentTime
                     }
                     

@@ -14,19 +14,22 @@ class GameScene : RSScene {
     // MARK: Setup
     
     override func didMoveToView(view: SKView) {
+        super.didMoveToView(view)
+        
         self.tps = 10
     }
     
     // MARK: Executing the Game Logic Loop
     
     override func updateGameLogic(currentTime: NSTimeInterval) {
-        print("logic")
+        // TODO: do your game logic here
     }
     
     // MARK: Executing the Animation Loop
     
     override func update(currentTime: NSTimeInterval) {
-        print("animation")
         super.update(currentTime)
+        
+        // TODO: do your game animations here
     }
 }

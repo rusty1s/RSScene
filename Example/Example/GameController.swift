@@ -17,12 +17,14 @@ class GameController: UIViewController {
         let skView = self.view as! SKView
         let scene = GameScene(size: view.bounds.size)
         
+        skView.showsFPS = true
+        scene.showsTPS = true
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
     }
 
     override func prefersStatusBarHidden() -> Bool {
-        return true
+        return false
     }
 }
 
