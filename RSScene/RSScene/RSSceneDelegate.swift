@@ -12,7 +12,7 @@ import SpriteKit
 /// to be called whenever the logic of the scene is being calculated.
 /// Typically, you supply a delegate when you want to use a scene without
 /// requiring the scene to be subclassed. The method in this protocol
-/// correspond to the method implemented by the RSScene class. If the delegate
+/// correspond to the method implemented by the `RSScene class. If the delegate
 /// is present, the method is called instead of the corresponding method on
 /// the scene object.
 public protocol RSSceneDelegate {

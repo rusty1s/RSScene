@@ -8,9 +8,12 @@
 
 import SpriteKit
 
-/// `RSScene` inherits from a `SKScene` object, which represents a scene
-/// of content in Sprite Kit. A `RSScene` extends the animation loop by
-/// adding a logic loop with its own interval.
+/// `RSScene` inherits from `SKScene` by adding a game logic loop to
+/// the runtime of a scene. `RSScene` distinguishs between a rendering
+/// loop (fps) and a loop, that calls game update logic (tps = ticks
+/// per seconds). Because games don't need to update its logic that
+/// often, the logic loop typically runs much slower than the rendering
+/// loop. This guarantees great performance for all kind of games!
 public class RSScene : SKScene {
     
     // MARK: Instance variables
