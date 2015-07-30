@@ -23,7 +23,7 @@ public class RSScene : SKScene {
     public var tps: Int {
         set {
             _tps = max(0, newValue)
-            actTPS = 0
+            currentTPS = 0
             tpsLabel?.text = "tps: 0.0"
         }
         get { return _tps }
@@ -50,7 +50,7 @@ public class RSScene : SKScene {
     
     private var inGameLogic: Bool = false
     
-    private var actTPS: Int = 0
+    private var currentTPS: Int = 0
     
     private var startTimeInterval: NSTimeInterval = 0
     
@@ -103,7 +103,7 @@ public class RSScene : SKScene {
         if !inGameLogic && tps > 0 {
             
             // wait for the game logic interval to pass the tps
-            if currentTime - startTimeInterval > Double(actTPS)*(1.0/Double(tps)) {
+            if currentTime - startTimeInterval > Double(currentTPS)*(1.0/Double(tps)) {
             
                 // execute the game logic
                 inGameLogic = true
@@ -115,14 +115,14 @@ public class RSScene : SKScene {
                         self.updateGameLogic(self.currentTime)
                     }
                     
-                    self.actTPS++
+                    self.currentTPS++
                     // if a second has passed, reset local variables
                     if self.currentTime > 1.0+self.startTimeInterval {
-                        let tps = min(self.actTPS, self.tps)
+                        let tps = min(self.currentTPS, self.tps)
                         dispatch_async(dispatch_get_main_queue()) {
                             self.tpsLabel?.text = "tps: \(tps).0"
                         }
-                        self.actTPS = 0
+                        self.currentTPS = 0
                         self.startTimeInterval = self.currentTime
                     }
                     
