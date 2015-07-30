@@ -1,10 +1,10 @@
 # RSScene
 
-`RSScene` inherits from `SKScene` by adding a game logic loop to the runtime of a scene. `RSScene` distinguishs between a rendering loop (fps) and a loop, that calls game update logic. The logic loop typically runs much slower than the rendering loop, because games don't need to update its logic that often. This guarantees great performance for all kind of games!
+`RSScene` inherits `SKScene` by adding a game logic loop to the runtime of a scene. `RSScene` distinguishs between a rendering loop (fps) and a loop, that calls game update logic. The logic loop typically runs much slower than the rendering loop, because games don't need to update its logic that often. This guarantees great performance for all kind of games!
 
 ## Usage
 
-1. Let your scene implementation inherits from `RSScene` instead of `SKScene`.
+1. Let your scene implementation inherits `RSScene` instead of `SKScene`.
 2. Set the logic loop rate, called `tps` (ticks per seconds), e.g. `self.tps = 10`.
 3. You can display the current tps of your scene by writing `self.showsTPS = true`, suitable for debugging.
 4. Update your game logic in `updateGameLogic(currentTime: NSTimeInterval)`.

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-/// `RSScene` inherits from `SKScene` by adding a game logic loop to
+/// `RSScene` inherits `SKScene` by adding a game logic loop to
 /// the runtime of a scene. `RSScene` distinguishs between a rendering
 /// loop (fps) and a loop, that calls game update logic (tps = ticks
 /// per seconds). Because games don't need to update its logic that
