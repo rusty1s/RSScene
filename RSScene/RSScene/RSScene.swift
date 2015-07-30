@@ -24,7 +24,7 @@ public class RSScene : SKScene {
         set {
             _tps = max(0, newValue)
             currentTPS = 0
-            tpsLabel?.text = "tps: 0.0"
+            setTpsLabelCount(0)
         }
         get { return _tps }
     }
@@ -64,14 +64,9 @@ public class RSScene : SKScene {
     /// Note that when you override this method, you need to call
     /// its super method.
     public override func didMoveToView(view: SKView) {
-        let label = UILabel(frame: CGRect(x: 4, y: 20, width: 60, height: 15))
-        label.textColor = UIColor.whiteColor()
-        label.font = UIFont(name: "Menlo", size: 10)
-        label.text = "tps: 0.0"
-        label.hidden = !showsTPS
-        
-        view.addSubview(label)
-        tpsLabel = label
+        setupTpsLabel()
+        tpsLabel?.hidden = !showsTPS
+        setTpsLabelCount(0)
     }
     
     /// Called immediately before a scene is removed from a view.
@@ -120,7 +115,7 @@ public class RSScene : SKScene {
                     if self.currentTime > 1.0+self.startTimeInterval {
                         let tps = min(self.currentTPS, self.tps)
                         dispatch_async(dispatch_get_main_queue()) {
-                            self.tpsLabel?.text = "tps: \(tps).0"
+                            self.setTpsLabelCount(tps)
                         }
                         self.currentTPS = 0
                         self.startTimeInterval = self.currentTime
@@ -130,5 +125,21 @@ public class RSScene : SKScene {
                 }
             }
         }
+    }
+    
+    // MARK: Helper
+    
+    private func setupTpsLabel() {
+        let label = UILabel(frame: CGRect(x: 4, y: 20, width: 60, height: 15))
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont(name: "Menlo", size: 10)
+        view?.addSubview(label)
+        
+        tpsLabel?.removeFromSuperview()
+        tpsLabel = label
+    }
+    
+    private func setTpsLabelCount(count: Int) {
+        tpsLabel?.text = "tps: \(count).0"
     }
 }
